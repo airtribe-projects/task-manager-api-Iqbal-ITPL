@@ -5,7 +5,7 @@ const port = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api/v1', router)
+app.use('/api/v1', router);
 
 app.listen(port, (err) => {
     if (err) {

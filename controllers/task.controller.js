@@ -53,18 +53,18 @@ exports.updateTask = (req, res) => {
         const task = tasks.find(t => t.id === parseInt(req.params.id));
         if (!task) return res.status(404).json({ message: 'Task not found' });
 
-        const { title, description, completed } = req.body;
-        if (req.body?.priority && !["low", "medium", "high"].includes(priority.toLowerCase())) {
+        const { title, description, completed, priority } = req.body;
+        if (priority && !["low", "medium", "high"].includes(priority.toLowerCase())) {
             return res.status(400).json({ error: "Invalid priority level. Use 'low', 'medium', or 'high'." });
         }
         if (title !== undefined) task.title = title;
         if (description !== undefined) task.description = description;
         if (completed !== undefined) task.completed = completed;
-        if(req.body?.priority) task.priority = priority.toLowerCase()
+        if(priority) task.priority = priority.toLowerCase();
 
         return res.status(200).json(task);
     } catch (error) {
-        return res.status(500).json({ message: error.message })
+        return res.status(500).json({ message: error.message });
     }
 };
 
@@ -76,7 +76,7 @@ exports.deleteTask = (req, res) => {
         tasks.splice(taskIndex, 1);
         return res.status(204).send();
     } catch (error) {
-        return res.status(500).json({ message: error.message })
+        return res.status(500).json({ message: error.message });
     }
 };
 exports.getPriorityTask = (req, res) => {
@@ -91,6 +91,6 @@ exports.getPriorityTask = (req, res) => {
         const filteredTasks = tasks.filter(task => task.priority.toLowerCase() === level.toLowerCase());
         return res.status(200).json(filteredTasks);
     } catch (error) {
-        return res.status(500).json({ message: error.message })
+        return res.status(500).json({ message: error.message });
     }
 }

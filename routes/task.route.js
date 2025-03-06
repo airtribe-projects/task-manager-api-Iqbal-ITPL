@@ -7,7 +7,7 @@ router.get('/tasks/:id', taskController.getTaskById);
 router.post('/tasks', taskController.createTask);
 router.put('/tasks/:id', taskController.updateTask);
 router.delete('/tasks/:id', taskController.deleteTask);
-router.get('/tasks/priority/:level', taskController.getPriorityTask)
+router.get('/tasks/priority/:level', taskController.getPriorityTask);
 
 
 module.exports = router;
